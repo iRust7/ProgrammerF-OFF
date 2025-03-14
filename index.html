@@ -24,7 +24,7 @@
         }
 
         .header-text {
-            font-size: 5vw; 
+            font-size: 5vw;
             margin-top: 15vh;
         }
 
@@ -41,11 +41,11 @@
         }
 
         .scroll-text {
-            font-size: 5vw; 
+            font-size: 5vw;
         }
 
         .arrow {
-            font-size: 6vw; 
+            font-size: 6vw;
             animation: bounce 1s infinite alternate;
         }
 
@@ -56,11 +56,11 @@
 
         .hidden-message {
             opacity: 0;
-            font-size: 8vw; 
+            font-size: 8vw;
             font-weight: bold;
             transition: opacity 0.5s ease-in-out;
             position: absolute;
-            top: 140vh; 
+            top: 140vh;
         }
 
         .footer {
@@ -68,12 +68,12 @@
             bottom: 5px;
             width: 100%;
             text-align: center;
-            font-size: 14px; 
+            font-size: 14px;
         }
 
         .hits {
             margin-top: 5px;
-            font-size: 14px; 
+            font-size: 14px;
         }
 
         .hits img {
@@ -92,37 +92,35 @@
     <div class="hidden-message">FUCK OFF</div>
 
     <audio id="trollAudio">
-    <source src="/rrat.mp3" type="audio/mpeg">
-</audio>
+        <source src="/rrat.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="footer">
         &copy; 2025 by Haq. All Rights Reserved.
         <div class="hits">
             Hits: <a href="https://hits.seeyoufarm.com">
-    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fprogrammer-f-off.vercel.app&count_bg=%23FFC500&title_bg=%230063FF&icon=redhat.svg&icon_color=%23FFFFFF&title=hits&edge_flat=false" alt="Hit Counter">
-</a>
+                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fprogrammer-f-off.vercel.app&count_bg=%23FFC500&title_bg=%230063FF&icon=redhat.svg&icon_color=%23FFFFFF&title=hits&edge_flat=false" alt="Hit Counter">
+            </a>
         </div>
     </div>
 
     <script>
+        let hasPlayed = false;
+
         window.addEventListener("scroll", function() {
             const hiddenMessage = document.querySelector(".hidden-message");
-            if (window.scrollY > window.innerHeight * 0.9) { 
+            const audio = document.getElementById("trollAudio");
+
+            if (window.scrollY > window.innerHeight * 0.9) {
                 hiddenMessage.style.opacity = "1";
+
+                if (!hasPlayed) {
+                    audio.play().catch(err => console.log("Autoplay diblokir, user harus interaksi dulu."));
+                    hasPlayed = true;
+                }
             } else {
                 hiddenMessage.style.opacity = "0";
             }
-            let hasPlayed = false; 
-
-window.addEventListener("scroll", function() {
-    let trollText = document.querySelector(".hidden-message"); 
-    let audio = document.getElementById("trollAudio");
-
-    if (trollText.getBoundingClientRect().top < window.innerHeight && !hasPlayed) {
-        audio.play().catch(err => console.log("Autoplay diblokir, user harus interaksi dulu."));
-        hasPlayed = true;
-    }
-
         });
     </script>
 
