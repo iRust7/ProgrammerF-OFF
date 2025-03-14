@@ -80,9 +80,28 @@
             width: 80px;
             height: auto;
         }
+
+        /* Overlay untuk trigger musik */
+        #overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
+
+    <div id="overlay">
+        <p>Klik untuk masuk</p>
+    </div>
 
     <div class="header-text">Jadi Programmer Katanya</div>
     <div class="sub-text">Mau Jadi Programmer?</div>
@@ -91,7 +110,6 @@
     <div class="arrow">↓</div>
     <div class="hidden-message">FUCK OFF</div>
 
-    <!-- Audio -->
     <audio id="trollAudio">
         <source src="/rrat.mp3" type="audio/mpeg">
     </audio>
@@ -111,17 +129,17 @@
 
         window.addEventListener("scroll", function() {
             const hiddenMessage = document.querySelector(".hidden-message");
-            const audio = document.getElementById("trollAudio");
-
             if (window.scrollY > window.innerHeight * 0.9) { 
                 hiddenMessage.style.opacity = "1";
-                if (!hasPlayed) {
-                    audio.play().catch(err => console.log("Autoplay diblokir, user harus interaksi dulu."));
-                    hasPlayed = true;
-                }
             } else {
                 hiddenMessage.style.opacity = "0";
             }
+        });
+
+        document.getElementById("overlay").addEventListener("click", function() {
+            let audio = document.getElementById("trollAudio");
+            audio.play().catch(err => console.log("Autoplay diblokir, user harus interaksi dulu."));
+            this.style.display = "none"; // Hilangkan overlay
         });
     </script>
 
