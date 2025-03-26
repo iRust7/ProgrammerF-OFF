@@ -54,13 +54,33 @@
             100% { transform: translateY(10px); }
         }
 
-        .hidden-message {
-            opacity: 0;
-            font-size: 8vw; 
-            font-weight: bold;
-            transition: opacity 0.5s ease-in-out;
+        .hidden-message-container {
             position: absolute;
             top: 140vh; 
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            width: 100%;
+            padding-bottom: 10vh; /* Beri jarak dengan footer */
+        }
+
+        .hidden-text {
+            font-size: 3vw; /* Lebih kecil dari FUCK OFF */
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .hidden-message {
+            font-size: 8vw; 
+            font-weight: bold;
+        }
+
+        .hidden-gif {
+            width: 60vw; /* Menyesuaikan ukuran layar */
+            max-width: 500px; /* Lebih besar di laptop */
+            min-width: 200px; /* Tidak terlalu besar di HP */
+            display: block;
+            margin: 20px auto; /* Beri jarak dengan teks */
         }
 
         .footer {
@@ -81,7 +101,6 @@
             height: auto;
         }
 
-        /* Overlay untuk trigger musik */
         #overlay {
             position: fixed;
             width: 100%;
@@ -108,9 +127,15 @@
     <div class="line"></div>
     <div class="scroll-text">Scroll down</div>
     <div class="arrow">↓</div>
-    <div class="hidden-message">FUCK OFF</div>
+    
+    <div class="hidden-message-container">
+        <div class="hidden-text">Sak Karepmu Lah</div>
+        <div class="hidden-message">FUCK OFF</div>
+        <img src="dance.gif" class="hidden-gif" alt="Dance GIF">
+        <div class="hidden-text">Yo Wes Lah Terserah wkwk</div>
+    </div>
 
-    <audio id="trollAudio">
+    <audio id="trollAudio" loop>
         <source src="/rrat.mp3" type="audio/mpeg">
     </audio>
 
@@ -128,18 +153,18 @@
         let hasPlayed = false; 
 
         window.addEventListener("scroll", function() {
-            const hiddenMessage = document.querySelector(".hidden-message");
+            const hiddenMessageContainer = document.querySelector(".hidden-message-container");
             if (window.scrollY > window.innerHeight * 0.9) { 
-                hiddenMessage.style.opacity = "1";
+                hiddenMessageContainer.style.opacity = "1";
             } else {
-                hiddenMessage.style.opacity = "0";
+                hiddenMessageContainer.style.opacity = "0";
             }
         });
 
         document.getElementById("overlay").addEventListener("click", function() {
             let audio = document.getElementById("trollAudio");
             audio.play().catch(err => console.log("Autoplay diblokir, user harus interaksi dulu."));
-            this.style.display = "none"; // Hilangkan overlay
+            this.style.display = "none";
         });
     </script>
 
